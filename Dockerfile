@@ -1,12 +1,7 @@
-FROM centos:latest
-MAINTAINER aftabapu131@gmail.com
-RUN yum install -y httpd \
- zip\
- unzip
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip  /var/www/html/
-WORKDIR /var/www/html/
-RUN unzip photogenic.zip
-RUN cp -rvf photogenic/* .
-RUN rm -rf photogenic photogenic.zip
-CMD [ "/usr/sbin/httpd","-D", "FOREGROUND" ]
-EXPOSE 80 22
+# Use the official Nginx image as a base image
+FROM nginx:alpine
+
+# Expose port 80 to allow external access
+EXPOSE 80
+
+# CMD instruction is not necessary in this case, as the base image's default CMD will start NGINX automatically
